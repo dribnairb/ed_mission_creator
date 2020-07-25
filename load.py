@@ -11,7 +11,7 @@ def plugin_start3(plugin_dir):
     # Look for load any quests
     for f in glob.glob("*.cfg"):
         QUESTS.append(Quest.load(f))
-   return "ed_mission_creator v%s with %s quests from %s"%(VERSION, len(QUESTS),  os.getcwd())
+    return "ed_mission_creator v%s with %s quests from %s"%(VERSION, len(QUESTS),  os.getcwd())
     
 def plugin_stop():
     pass
