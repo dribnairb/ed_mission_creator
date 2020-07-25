@@ -2,6 +2,7 @@ from useful import *
 import traceback
 import Quest
 import os
+import glob
 
 # Minimal load for Quests
 VERSION = 0.01
@@ -9,9 +10,9 @@ QUESTS = []
 
 def plugin_start3(plugin_dir):
     # Look for load any quests
-    for f in glob.glob("*.cfg"):
+    for f in glob.glob(r"%s\*.cfg"%plugin_dir):
         QUESTS.append(Quest.load(f))
-    return "ed_mission_creator v%s with %s quests from %s"%(VERSION, len(QUESTS),  os.getcwd())
+    return "v%s with %s quests from %s"%(VERSION, len(QUESTS),  plugin_dir)
     
 def plugin_stop():
     pass

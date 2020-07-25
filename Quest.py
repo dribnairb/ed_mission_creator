@@ -7,10 +7,10 @@ class Quest(object):
     def __init__(self, config):
         self.config = config
         self.sections = []
-        for section, pairs in sorted(config.sections()): # Requires sections to be in alphabetical order
+        for section in config.sections():
             require = {}
             actions = {}
-            for key, value in pairs:
+            for key,value in config.items(section):
                 if key.startswith("action_"):
                     actions[key[7:]] = value
                 elif key.startswith("require_"):
@@ -21,7 +21,6 @@ class Quest(object):
             self.sections.append(qs)
 
     def main(self, entry):
-
         for section in self.sections:
             section.main(entry)
             
