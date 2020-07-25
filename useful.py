@@ -2,7 +2,7 @@ import math
 
 def log(*args):
     line = " ".join([str(a) for a in args])
-    open(r"C:\Users\dribn\AppData\Local\EDMarketConnector\plugins\Brian\brian.log","a").write("%s\n"%line)
+    open(r"ed_mission_creator.log","a").write("%s\n"%line)
     
 def distance(pos1,pos2):
     total = 0 
@@ -13,7 +13,7 @@ def distance(pos1,pos2):
 def matchEntry(entry, required):
     result = True
     for key, expected in required.items():
-        actual = entry.get(key)
+        actual = str(entry.get(key))
         if isinstance(expected,(str,int,bool)):
             result = (actual == expected) and result
         else: # Assume regex
