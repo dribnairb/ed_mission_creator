@@ -22,8 +22,9 @@ def matchEntry(entry, required):
         actual = str(entry.get(key))
         if isinstance(expected,(str,int,bool)):
             result = (actual == expected) and result
-        else: # Assume regex
+        else: # Assume regex TODO not a great solution
             result = (actual is not None and expected.match(actual)) and result
+        #print(key, expected,actual, result)
     return result
         
         

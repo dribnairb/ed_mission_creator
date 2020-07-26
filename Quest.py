@@ -12,6 +12,8 @@ class Quest(object):
             require = {}
             actions = {}
             for key,value in config.items(section):
+                key = key.strip()
+                value = value.strip()
                 if key.startswith("action_"):
                     actions[key[7:]] = value
                 elif key.startswith("require_"):
@@ -30,4 +32,3 @@ def load(filename,path):
     config = configparser.ConfigParser()
     config.read_file(open(filename))
     return Quest(config, path)
-    

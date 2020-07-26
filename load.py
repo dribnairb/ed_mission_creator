@@ -28,3 +28,7 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
 
         
     
+if __name__=="__main__":
+    # testing
+    plugin_start3(r"C:\Users\dribn\AppData\Local\EDMarketConnector\plugins\ed_mission_creator")
+    journal_entry("cmdr",False, "System","Station",{'timestamp': '2020-07-26T14:48:43Z', 'event': 'FSDTarget', 'Name': 'Auss', 'SystemAddress': 2243877095787, 'StarClass': 'F'},{})
