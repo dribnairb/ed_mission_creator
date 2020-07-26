@@ -57,7 +57,13 @@ class QuestSection(object):
         print("checkStore %s %s"%(self.path, self.requireStore))
         f = self.getStorage()
         items = set(x.strip() for x in open(f).readlines())
-        result = all(r in items for r in self.requireStore)
+        result = True
+        for item in self.requireStore:
+            if item.startswith("!") and item[1:] in items:
+                result = False
+            elif item not in items:
+                result = False
+        #result = all(r in items for r in self.requireStore)
         return result
         
     def store(self):
