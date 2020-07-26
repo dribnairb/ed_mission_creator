@@ -43,8 +43,8 @@ class QuestSection(object):
             self.actionStore = [ x.strip() for x in action.pop("store").split(",") ]
         
         
-        self.require = require
-        self.action = action
+        self.require = require # This should be empty by now
+        self.action = action # This should be empty by now
 
     def getStorage(self):
         return r"%s\quests.store"%self.path
@@ -71,7 +71,7 @@ class QuestSection(object):
         items = set(x.strip() for x in open(f).readlines()) # TODO duplicates above
         
         for item in self.actionStore:
-            if item not in items:
+            if not item.startswith("!") and item not in items:
                 items.add(item)
                 
         open(f,"w").write("\n".join(sorted(items))) # TODO make thread safe
@@ -79,7 +79,7 @@ class QuestSection(object):
     def main(self, entry):
         if matchEntry(entry, self.requireEvent):
             if self.checkStore() and self.checkDistance(entry):
-                log("Action %s %s %s %s"%(self, entry, self.require, self.action)) # TODO debug. Should be empty action by now
+                log("Action %s %s %s %s"%(self, entry, self.requireEvent, self.actionMessage)) # TODO debug. Should be empty action by now
                 msg = self.actionMessage.format_map(entry)
                 log(msg)
                 try:
