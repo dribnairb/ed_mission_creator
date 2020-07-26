@@ -35,7 +35,7 @@ def matchEntry(entry, required):
                 result = (actual == expected) and result
             else: # Assume regex TODO not a great solution
                 result = (actual is not None and expected.match(actual)) and result
-        #print(key, expected,actual, result)
+            #debug(key, expected, actual, result)
     return result
         
         

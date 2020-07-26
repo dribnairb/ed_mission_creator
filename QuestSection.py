@@ -49,21 +49,20 @@ class QuestSection(object):
     def getStorage(self):
         return r"%s\quests.store"%self.path
         
-    def checkDistance(self, entry):
-        return True # TODO StarPos isn't in all entry's so we need to check this iff it's a particular entry type. Maybe it needs to be a separate questsection
-        # for system, distance in self.requireDistance
-        
     def checkStore(self):
-        print("checkStore %s %s"%(self.path, self.requireStore))
         f = self.getStorage()
         items = set(x.strip() for x in open(f).readlines())
         result = True
         for item in self.requireStore:
-            if item.startswith("!") and item[1:] in items:
-                result = False
+            if item.startswith("!"):
+                if item[1:] in items:
+                    #debug(1,item, items)
+                    result = False
             elif item not in items:
+                #debug(2,item,items)
                 result = False
         #result = all(r in items for r in self.requireStore)
+        print("checkStore %s %s %s"%(f, self.requireStore, result))
         return result
         
     def store(self):
@@ -78,7 +77,7 @@ class QuestSection(object):
     
     def main(self, entry):
         if matchEntry(entry, self.requireEvent):
-            if self.checkStore() and self.checkDistance(entry):
+            if self.checkStore():
                 log("Action %s %s %s %s"%(self, entry, self.requireEvent, self.actionMessage)) # TODO debug. Should be empty action by now
                 msg = self.actionMessage.format_map(entry)
                 log(msg)
