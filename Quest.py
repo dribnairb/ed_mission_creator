@@ -4,9 +4,10 @@ import configparser
 import QuestSection
 
 class Quest(object):
-    def __init__(self, config):
+    def __init__(self, config, path):
         self.config = config
         self.sections = []
+        self.path = path
         for section in config.sections():
             require = {}
             actions = {}
@@ -17,7 +18,7 @@ class Quest(object):
                     require[key[8:]] = value
                 else:
                     log("Unexpected config %s = %s"%(key, value))
-            qs = QuestSection.QuestSection(require, actions)
+            qs = QuestSection.QuestSection(require, actions, path)
             self.sections.append(qs)
 
     def main(self, entry):
@@ -25,8 +26,8 @@ class Quest(object):
             section.main(entry)
             
             
-def load(filename):
+def load(filename,path):
     config = configparser.ConfigParser()
     config.read_file(open(filename))
-    return Quest(config)
+    return Quest(config, path)
     

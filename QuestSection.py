@@ -2,7 +2,9 @@ from useful import *
 import re
 
 class QuestSection(object):
-    def __init__(self, require, action):
+    def __init__(self, require, action, path):
+        self.path = path
+        
         self.requireEvent = {}
         if "event" in require:
             for entry in require.pop("event").split(","):
@@ -21,17 +23,22 @@ class QuestSection(object):
         self.action = action
         
     def checkStore(self):
+        print("checkStore %s %s"%(self.path, self.requireStore))
         return True
         
+    def store(self):
+        for item in self.actionStore:
+            print("STORE %s"%item) # TODO need namespace of quest (and quest section?). And need to append to existing list
+    
     def main(self, entry):
         if matchEntry(entry, self.requireEvent):
             if self.checkStore():
-                self.execute(entry)
-    
-    def execute(self, entry):
-        log("Action %s %s %s %s"%(self, entry, self.require, self.action)) # TODO debug. Should be empty action by now
-        log(self.actionMessage.format(entry))
-        log(self.actionStore)
+                log("Action %s %s %s %s"%(self, entry, self.require, self.action)) # TODO debug. Should be empty action by now
+                log(self.actionMessage.format(entry))
+                log(self.actionStore)
+                if self.actionStore:
+                    self.store()
+        
         
         
         

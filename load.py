@@ -11,7 +11,7 @@ QUESTS = []
 def plugin_start3(plugin_dir):
     # Look for load any quests
     for f in glob.glob(r"%s\*.cfg"%plugin_dir):
-        QUESTS.append(Quest.load(f))
+        QUESTS.append(Quest.load(f, plugin_dir))
     return "v%s with %s quests from %s"%(VERSION, len(QUESTS),  plugin_dir)
     
 def plugin_stop():
