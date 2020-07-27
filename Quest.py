@@ -2,9 +2,11 @@ from useful import *
 import re
 import configparser
 import QuestSection
+import os
 
 class Quest(object):
-    def __init__(self, config, path):
+    def __init__(self, name, config, path):
+        self.name = name
         self.config = config
         self.sections = []
         self.path = path
@@ -20,15 +22,17 @@ class Quest(object):
                     require[key[8:]] = value
                 else:
                     log("Unexpected config %s = %s"%(key, value))
-            qs = QuestSection.QuestSection(require, actions, path)
+            qs = QuestSection.QuestSection(self, section, require, actions)
             self.sections.append(qs)
 
     def main(self, entry):
         for section in self.sections:
-            section.main(entry)
+            if section.main(entry):
+                break
             
             
 def load(filename,path):
     config = configparser.ConfigParser()
     config.read_file(open(filename))
-    return Quest(config, path)
+    name = os.path.split(filename)[-1].split(".cfg")[0]
+    return Quest(name, config, path)

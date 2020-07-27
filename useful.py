@@ -23,19 +23,34 @@ def matchEntry(entry, required):
         # Special case:
         if key == "near":
             expected = expected.split(";")
-            if "StarPos" in entry:
+            actual = entry.get("StarPos")
+            if actual is not None:
                 expectedPos, expectedDistance = (float(expected[0]), float(expected[1]), float(expected[2])), float(expected[3])
-                howFar = distance(entry["StarPos"], expectedPos)
+                howFar = distance(actual, expectedPos)
                 log("%sLY from %s"%(howFar, expectedPos))
                 result = howFar <= expectedDistance and result
                 entry["distance"] = howFar
+            else:
+                result = False
         else:
             actual = str(entry.get(key))
-            if isinstance(expected,(str,int,bool)):
+            if expected.startswith(("<",">")):
+                try:
+                    if expected[0] == ">":
+                        result = (float(actual)>=float(expected[1:]))
+                    elif expected[0] == "<":
+                        result = (float(actual)<=float(expected[1:]))
+                except Exception as e:
+                    debug(e)
+                    result = False
+                
+            elif isinstance(expected,(str,int,bool)):
                 result = (actual == expected) and result
             else: # Assume regex TODO not a great solution
                 result = (actual is not None and expected.match(actual)) and result
-            #debug(key, expected, actual, result)
+        if result is False:
+            break
+        #debug(key, expected, actual, result)
     return result
         
         

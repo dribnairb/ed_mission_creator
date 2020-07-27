@@ -11,8 +11,11 @@ import winsound # TODO this makes it windows only
 #    log("cannot import win32com %s so no speech!"%e)
 
 class QuestSection(object):
-    def __init__(self, require, action, path):
-        self.path = path
+    def __init__(self, quest, section, require, action):
+        self.quest = quest
+        self.section = section
+        self.path = quest.path
+        self.name = quest.name
         
         self.requireEvent = {}
         if "event" in require:
@@ -38,7 +41,7 @@ class QuestSection(object):
         else:
             self.actionMessage = None
         
-        self.actionStore = []
+        self.actionStore = ["%s.%s"%(self.name, self.section)] # Default to saving this step is completed
         if "store" in action:
             self.actionStore = [ x.strip() for x in action.pop("store").split(",") ]
         
@@ -97,6 +100,8 @@ class QuestSection(object):
                 #log(self.actionStore)
                 if self.actionStore:
                     self.store()
+                return True
+        return False
         
         
         
