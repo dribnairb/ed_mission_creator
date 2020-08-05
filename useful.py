@@ -33,19 +33,19 @@ def matchEntry(entry, required):
             else:
                 result = False
         else:
-            actual = str(entry.get(key))
-            if expected.startswith(("<",">")):
-                try:
-                    if expected[0] == ">":
-                        result = (float(actual)>=float(expected[1:]))
-                    elif expected[0] == "<":
-                        result = (float(actual)<=float(expected[1:]))
-                except Exception as e:
-                    debug(e)
-                    result = False
-                
-            elif isinstance(expected,(str,int,bool)):
-                result = (actual == expected) and result
+            actual = str(entry.get(key))                
+            if isinstance(expected,(str,int,bool)):
+                if expected.startswith(("<",">")):
+                    try:
+                        if expected[0] == ">":
+                            result = (float(actual)>=float(expected[1:]))
+                        elif expected[0] == "<":
+                            result = (float(actual)<=float(expected[1:]))
+                    except Exception as e:
+                        debug(e)
+                        result = False
+                else:
+                    result = (actual == expected) and result
             else: # Assume regex TODO not a great solution
                 result = (actual is not None and expected.match(actual)) and result
         if result is False:

@@ -18,7 +18,7 @@ def plugin_stop():
     pass
   
 def journal_entry(cmdr, is_beta, system, station, entry, state):
-    if entry.get("event") not in ("ReceiveText","Music"):
+    if entry.get("event") not in ("ReceiveText","Music","ShipTargeted"):
         debug(entry) # TODO remove
         for quest in QUESTS:
             try:
