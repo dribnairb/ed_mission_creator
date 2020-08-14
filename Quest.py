@@ -22,7 +22,11 @@ class Quest(object):
                     require[key[8:]] = value
                 else:
                     log("Unexpected config %s = %s"%(key, value))
-            qs = QuestSection.QuestSection(self, section, require, actions)
+            try:
+                qs = QuestSection.QuestSection(self, section, require, actions)
+            except Exception as e:
+                log("%s (%s %s)"%(e, name, section))
+                raise
             self.sections.append(qs)
 
     def main(self, entry):
