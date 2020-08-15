@@ -26,6 +26,9 @@ def speak2(msg, path):
     print(result)
 
 # API version
+# TODO need options to show a message for longer/shorter time. Even permanently for a mission objective maybe?
+# TODO need to keep track of messages on screen so we can display other ones in a more suitable place
+# TODO messages should be able to specify their colour, size etc.
 def speak(msg, path=None, text=True, voice=True):
     print("speak %s %s %s"%(text, voice, msg)) # debugging
     if text:
@@ -34,14 +37,16 @@ def speak(msg, path=None, text=True, voice=True):
             from edmcoverlay import Overlay
             client = Overlay()
         
-        client.send_message(
-          msgid="ed_mission_creator1",
-          text=msg,
-          color="#ffffff",
-          size="large",
-          x=100,
-          y=100,
-          ttl=20)
+        msgs = [ m.strip() for m in msg.split(".") if m.strip() ] # Split long lines. Assume each sentence fits on screen.
+        for i,m in enumerate(msgs):
+            client.send_message(
+                msgid="ed_mission_creator%s"%i,
+                text=m,
+                color="#ffffff",
+                size="large",
+                x=100,
+                y=80+(i*22),
+                ttl=20)
     
     if voice:
         try:
