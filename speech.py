@@ -41,7 +41,9 @@ def speak(msg, path=None, text=True, voice=True):
                     client = Overlay()
                 
                 msgs = [ m.strip() for m in msg.split(".") if m.strip() ] # Split long lines. Assume each sentence fits on screen.
+                ttl = 0
                 for i,m in enumerate(msgs):
+                    ttl += int(2+(0.4*len(m.split()))) # Longer time for longer messages
                     client.send_message(
                         msgid="ed_mission_creator%s"%i,
                         text=m,
@@ -49,7 +51,7 @@ def speak(msg, path=None, text=True, voice=True):
                         size="large",
                         x=25,
                         y=50+(i*22),
-                        ttl=int(2+(len(m.split()))) # Longer time for longer messages
+                        ttl=ttl
                         )
                     #time.sleep(0.1) # Waiting here means the voiceover won't start until we're finished. Plus we don't want to sleep on the last line. TODO maybe run in a thread?
                 break # If it works, don't retry :)
