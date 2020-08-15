@@ -80,7 +80,7 @@ class QuestSection(object):
     def main(self, entry):
         if matchEntry(entry, self.requireEvent):
             if self.checkStore():
-                log("Action %s %s %s %s"%(self, entry, self.requireEvent, self.actionMessage)) # TODO debug. Should be empty action by now
+                #log("Action %s %s %s %s"%(self, entry, self.requireEvent, self.actionMessage)) # TODO debug. Should be empty action by now
                 msg = self.actionMessage.format_map(entry)
                 log(msg)
                 try:

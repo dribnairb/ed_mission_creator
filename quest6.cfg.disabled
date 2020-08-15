@@ -1,8 +1,0 @@
-[test1]
-require_event=event:Market
-action_message=You have entered the market. This is simply a long message to test how it works. If you keep seeing this simply delete the quest6 cfg file.
-
-[test2]
-# Target one system
-require_event=event:FSDTarget
-action_message=You have targeted
