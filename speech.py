@@ -49,7 +49,7 @@ def speak(msg, path=None, text=True, voice=True):
                         size="large",
                         x=25,
                         y=50+(i*22),
-                        ttl=int(5+(0.8*len(m.split()))) # Longer time for longer messages
+                        ttl=int(2+(len(m.split()))) # Longer time for longer messages
                         )
                     #time.sleep(0.1) # Waiting here means the voiceover won't start until we're finished. Plus we don't want to sleep on the last line. TODO maybe run in a thread?
                 break # If it works, don't retry :)

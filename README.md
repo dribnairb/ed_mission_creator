@@ -29,10 +29,12 @@ In game you should see a text message saying "ed mission creator started" and a 
 
 Example Mission
 ---------------
+quest6.cfg can be used as a manual test. Type "EDMC Hello" into the chat.
+
 quest1.cfg contains an example mission. It should start next time you dock at a station (Fleet Carrier probably doesn't work)
-The mission now uses EDMCOverlay to show text and attempts to play voiceover using Windows 10 voice library
-If you have any problems with the mission and want to start again, find the file "quests.store" in c:\Users\me\AppData\Local\EDMarketConnector\plugins\ed_mission_creator and delete it
-quest6.cfg can be used as a manual test. Entering the commodity market will display a message. Also targeting a system in the galaxy map. These messages should only appear once.
+
+If you have any problems with a mission and want to start again, find the file "quests.store" in c:\Users\me\AppData\Local\EDMarketConnector\plugins\ed_mission_creator and delete it
+
 
 Create your own Missions
 ------------------------

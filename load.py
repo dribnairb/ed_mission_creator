@@ -22,8 +22,8 @@ def plugin_stop():
     pass
   
 def journal_entry(cmdr, is_beta, system, station, entry, state):
-    if entry.get("event") not in ("ReceiveText","Music","ShipTargeted"):
-        debug(entry) # TODO remove
+    if entry.get("event") not in ("Music","ShipTargeted","ReceiveText"): # For speed, ignore common events we're not interested in. TODOSPEED calculate this list based on the loaded quests
+        #debug(entry) # TODO remove
         for quest in QUESTS:
             try:
                 quest.main(entry)
