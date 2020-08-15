@@ -1,15 +1,17 @@
 import math
 
-#PATH = r"%LOCALAPPDATA%\EDMarketConnector\plugins\ed_mission_creator" # TODO Only works on Windows
-PATH = r"C:\Users\dribn\AppData\Local\EDMarketConnector\plugins\ed_mission_creator" # TODO replace with above
+PATH = r"%LOCALAPPDATA%\EDMarketConnector\plugins\ed_mission_creator" # TODO Only works on Windows
 
 def log(*args):
     line = " ".join([str(a) for a in args])
     print(line)
     
 def debug(*args):
-    line = " ".join([str(a) for a in args])
-    open(r"c:\temp\events.log","a").write("%s\n"%line)
+    try:
+        line = " ".join([str(a) for a in args])
+        open(r"c:\temp\events.log","a").write("%s\n"%line)
+    except Exception as e:
+        print(e)
     
 def distance(pos1,pos2):
     total = 0 

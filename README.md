@@ -19,9 +19,11 @@ Unzip the entire directory into the plugins folder for EDMarketConnector. eg:
 c:\Users\me\AppData\Local\EDMarketConnector\plugins\ed_mission_creator
 
 
+(Re)start Elite Dangerous (EDMCOverlay requires it to be running before it starts)
 (Re)start ED Market Connector
 In File -> Settings you should see ed_mission_creator under "Enabled plugins". If not, something has gone wrong. Logs may be available in %TMP%\EDMarketConnector.log
 
+In game you should see a text message saying "ed mission creator started" and a voiceover saying the same thing. If only one of these works then you can probably still play without the other. If neither works then installation has failed. More information may be available in %TMP%\EDMarketConnector.log
 
 
 
@@ -29,6 +31,7 @@ Example Mission
 ---------------
 quest1.cfg contains an example mission. It should start next time you dock at a station (Fleet Carrier probably doesn't work)
 The mission now uses EDMCOverlay to show text and attempts to play voiceover using Windows 10 voice library
+If you have any problems with the mission and want to start again, find the file "quests.store" in c:\Users\me\AppData\Local\EDMarketConnector\plugins\ed_mission_creator and delete it
 
 Create your own Missions
 ------------------------
@@ -46,6 +49,7 @@ action_message=Play a message to the player
 
 Notes
 -----
+All code and instructions provided as-is. Use at your own risk. I've made virtually no attempt at making it particularly efficient or secure.
 I know it's not coded very well, this is a proof of concept and I've changed my mind many times :)
 Feel free to take any/all code and come up with something better
 Alternatively, feel free to make new mission files and submit them. I am particularly interested in story arcs that lead to finding something in Elite Dangerous that a player might otherwise miss (eg. Something that points you towards the Eagle Eye network without having to know in advance they already exist, and then nudging you in the right direction after that)

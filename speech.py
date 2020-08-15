@@ -26,7 +26,7 @@ def speak2(msg, path):
     print(result)
 
 # API version
-def speak(msg, text=True, voice=True):
+def speak(msg, path=None, text=True, voice=True):
     print("speak %s %s %s"%(text, voice, msg)) # debugging
     if text:
         global client
@@ -44,11 +44,18 @@ def speak(msg, text=True, voice=True):
           ttl=20)
     
     if voice:
-        if speaker:
-            speaker.Speak(msg)
-        else:
-            raise Exception("Voice not available")
+        try:
+            if speaker:
+                speaker.Speak(msg)
+            else:
+                speak2(msg,path)# Attempt it the other way
+        except Exception as e:
+            log("Text2Speech failed %s"%e)
 
 if __name__=="__main__":
     msg = " ".join(sys.argv[1:])
     speak(msg, text=False, voice=True) # Running from the command line is when the voice PYTHONPATH isn't working
+    import edmcoverlay, os
+    
+    edmcoverlay.HERE = os.path.split(edmcoverlay.HERE)[0]
+    speak(msg, text=True, voice=False)

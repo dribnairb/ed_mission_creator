@@ -4,6 +4,7 @@ import Quest
 import os
 import glob
 import sys
+import speech
 
 # Minimal load for Quests
 VERSION = 0.02
@@ -14,6 +15,7 @@ def plugin_start3(plugin_dir):
     for f in glob.glob(r"%s\*.cfg"%plugin_dir):
         QUESTS.append(Quest.load(f, plugin_dir))
     log("ed_mission_creator started %s"%sys.path)
+    speech.speak("ED mission creator started with %s quests"%len(QUESTS), path=plugin_dir)
     return "v%s with %s quests from %s"%(VERSION, len(QUESTS),  plugin_dir)
     
 def plugin_stop():
@@ -32,6 +34,6 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
     
 if __name__=="__main__":
     # testing
-    plugin_start3(r"C:\Users\dribn\AppData\Local\EDMarketConnector\plugins\ed_mission_creator")
+    plugin_start3(r"%localappdata%\EDMarketConnector\plugins\ed_mission_creator")
     #journal_entry("cmdr",False, "System","Station",{'timestamp': '2020-07-26T14:48:43Z', 'event': 'FSDTarget', 'Name': 'Auss', 'SystemAddress': 2243877095787, 'StarClass': 'F'},{})
     journal_entry("cmdr",False, "System","Station",{'timestamp': '2020-07-26T14:48:43Z', 'event': 'FSSSignalDiscovered', 'ThreatLevel': 0, 'SystemAddress': 2243877095787, 'StarClass': 'F'},{})

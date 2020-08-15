@@ -63,13 +63,16 @@ class QuestSection(object):
         
     def store(self):
         f = self.getStorage()
-        items = set(x.strip() for x in open(f).readlines()) # TODO duplicates above
+        try:
+            items = set(x.strip() for x in open(f).readlines()) # TODO duplicates above
+        except FileNotFoundError:
+            items = set()
         
         for item in self.actionStore:
             if not item.startswith("!") and item not in items:
                 items.add(item)
                 
-        open(f,"w").write("\n".join(sorted(items))) # TODO make thread safe
+        open(f,"w+").write("\n".join(sorted(items))) # TODO make thread safe
     
     def main(self, entry):
         if matchEntry(entry, self.requireEvent):
@@ -78,13 +81,9 @@ class QuestSection(object):
                 msg = self.actionMessage.format_map(entry)
                 log(msg)
                 try:
-                    speech.speak(msg)
+                    speech.speak(msg, path=self.path) # TODO path is only needed if I can't solve the problem with voice inside EDMC
                 except Exception as e:
                     log("speak failed  %s"%e)
-                    try:
-                        speech.speak2(msg,self.path)# Attempt it the other way
-                    except Exception as e:
-                        log("Text2Speech failed %s"%e)
 
                 if self.actionStore:
                     self.store()
