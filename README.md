@@ -11,7 +11,12 @@ c:\Users\me\AppData\Local\EDMarketConnector\plugins\ed_mission_creator
 (Re)start ED Market Connector
 In File -> Settings you should see ed_mission_creator under "Enabled plugins". If not, something has gone wrong. Logs may be available in %TMP%\EDMarketConnector.log
 
-This requires Python3 to already be installed with win32com.client for speech.
+This requires Python3 to already be installed with win32com.client for speech. (Currently assumed to be installed in C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Lib\site-packages so if that's not right for you edit speech.py)
+
+Example Mission
+---------------
+quest1.cfg contains an example mission. It should start next time you dock at a station.
+The mission just plays text in the background (Does anyone know how to inject a message into Elite Dangerous?)
 
 Missions
 --------

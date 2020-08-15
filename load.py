@@ -3,6 +3,7 @@ import traceback
 import Quest
 import os
 import glob
+import sys
 
 # Minimal load for Quests
 VERSION = 0.01
@@ -12,6 +13,7 @@ def plugin_start3(plugin_dir):
     # Look for load any quests
     for f in glob.glob(r"%s\*.cfg"%plugin_dir):
         QUESTS.append(Quest.load(f, plugin_dir))
+    log("ed_mission_creator started %s"%sys.path)
     return "v%s with %s quests from %s"%(VERSION, len(QUESTS),  plugin_dir)
     
 def plugin_stop():
