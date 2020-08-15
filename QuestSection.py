@@ -3,12 +3,13 @@ from useful import *
 #sys.path.append(r"C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Lib\site-packages") # TODO why isn't this available in EDMarketConnector?
 
 import re
-import winsound # TODO this makes it windows only
+#import winsound # TODO this makes it windows only
 #try:
 #    import win32com
 #    import win32com.client
 #except ImportError as e:
 #    log("cannot import win32com %s so no speech!"%e)
+import speech
 
 class QuestSection(object):
     def __init__(self, quest, section, require, action):
@@ -85,14 +86,8 @@ class QuestSection(object):
                 msg = self.actionMessage.format_map(entry)
                 log(msg)
                 try:
-                    #speaker = win32com.client.Dispatch("SAPI.SpVoice")
-                    #speaker.Speak(msg)
-                    import subprocess
-                    #subprocess.call()
-                    startupinfo = subprocess.STARTUPINFO()
-                    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-                    startupinfo.wShowWindow = subprocess.SW_HIDE
-                    subprocess.Popen(["python",r"%s\speech.py"%self.path]+(msg.split()), startupinfo=startupinfo) # play in background
+                    #speech.speak(msg)
+                    speech.speak2(msg,self.path)
                 except Exception as e:
                     log("Text2Speech failed %s"%e)
 
