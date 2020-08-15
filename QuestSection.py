@@ -47,7 +47,10 @@ class QuestSection(object):
         
     def checkStore(self):
         f = self.getStorage()
-        items = set(x.strip() for x in open(f).readlines())
+        try:
+            items = set(x.strip() for x in open(f).readlines()) # TODO duplicates below
+        except FileNotFoundError:
+            items = set()
         result = True
         for item in self.requireStore:
             if item.startswith("!"):
@@ -58,7 +61,7 @@ class QuestSection(object):
                 #debug(2,item,items)
                 result = False
         #result = all(r in items for r in self.requireStore)
-        print("checkStore %s %s %s"%(f, self.requireStore, result))
+        #print("checkStore %s %s %s"%(f, self.requireStore, result))
         return result
         
     def store(self):
