@@ -6,7 +6,7 @@ import glob
 import sys
 
 # Minimal load for Quests
-VERSION = 0.01
+VERSION = 0.02
 QUESTS = []
 
 def plugin_start3(plugin_dir):

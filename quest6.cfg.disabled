@@ -1,0 +1,8 @@
+[test1]
+require_event=event:Market
+action_message=You have entered the market
+
+[test2]
+# Target one system
+require_event=event:FSDTarget
+action_message=You have targeted

@@ -1,25 +1,37 @@
-# ed_mission_creator
+# ed_mission_creator https://github.com/dribnairb/ed_mission_creator
 Testing an idea for creating story/mission things for Elite Dangerous
+
+Prerequisites
+-------------
+ED Market Connector: https://github.com/EDCD/EDMarketConnector/releases/tag/Release%2F4.0.4 (When I wrote this I was using v4.0.4. Other versions may or may not work)
+EDMCOverlay: https://github.com/inorton/EDMCOverlay/releases (When I wrote this I was using v1.0.5. Other versions may or may not work).
+Windows 10: win32com.client is required for voiceover. May or may not be required for the rest of the plugin to work (I've not tested it).
+Python 3 https://www.python.org/ (This may not be necessary if you don't want a voiceover. But ED Market Connector uses Python anyway. At time of writing I can't get the voice to work within EDMC so it tries to call python directly from the command line)
+
+
 
 Installation
 ------------
-NOTE This is pre-alpha. It only works on Windows 10 and may not even work there :)
+NOTE This is pre-alpha. Don't be surprised if there are bugs or problems.
 
-Copy the entire directory into the plugins folder for EDMarketConnector. eg:
+Download the zip from https://github.com/dribnairb/ed_mission_creator (Code -> Download ZIP)
+Unzip the entire directory into the plugins folder for EDMarketConnector. eg:
 c:\Users\me\AppData\Local\EDMarketConnector\plugins\ed_mission_creator
+
 
 (Re)start ED Market Connector
 In File -> Settings you should see ed_mission_creator under "Enabled plugins". If not, something has gone wrong. Logs may be available in %TMP%\EDMarketConnector.log
 
-This requires Python3 to already be installed with win32com.client for speech. (Currently assumed to be installed in C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Lib\site-packages so if that's not right for you edit speech.py)
+
+
 
 Example Mission
 ---------------
-quest1.cfg contains an example mission. It should start next time you dock at a station.
-The mission just plays text in the background (Does anyone know how to inject a message into Elite Dangerous?)
+quest1.cfg contains an example mission. It should start next time you dock at a station (Fleet Carrier probably doesn't work)
+The mission now uses EDMCOverlay to show text and attempts to play voiceover using Windows 10 voice library
 
-Missions
---------
+Create your own Missions
+------------------------
 Each "mission" is a single .cfg file in the ed_mission_creator folder.
 Each section within the file is a single step to be triggered when each of the "require_" properties is met
 Once all require_ properties have been met by an event from ED Market Connector all the action_ properties are applied.
@@ -36,4 +48,4 @@ Notes
 -----
 I know it's not coded very well, this is a proof of concept and I've changed my mind many times :)
 Feel free to take any/all code and come up with something better
-Alternatively, feel free to make new mission files and submit them. I am particularly interested in story arcs that lead to finding something in Elite Dangerous that a player might otherwise miss (eg. Something that points you towards the INRA bases without having to know in advance they already exist)
+Alternatively, feel free to make new mission files and submit them. I am particularly interested in story arcs that lead to finding something in Elite Dangerous that a player might otherwise miss (eg. Something that points you towards the Eagle Eye network without having to know in advance they already exist, and then nudging you in the right direction after that)

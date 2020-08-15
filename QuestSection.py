@@ -1,14 +1,6 @@
 from useful import *
-#import sys
-#sys.path.append(r"C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Lib\site-packages") # TODO why isn't this available in EDMarketConnector?
 
 import re
-#import winsound # TODO this makes it windows only
-#try:
-#    import win32com
-#    import win32com.client
-#except ImportError as e:
-#    log("cannot import win32com %s so no speech!"%e)
 import speech
 
 class QuestSection(object):
@@ -86,13 +78,14 @@ class QuestSection(object):
                 msg = self.actionMessage.format_map(entry)
                 log(msg)
                 try:
-                    #speech.speak(msg)
-                    speech.speak2(msg,self.path)
+                    speech.speak(msg)
                 except Exception as e:
-                    log("Text2Speech failed %s"%e)
+                    log("speak failed  %s"%e)
+                    try:
+                        speech.speak2(msg,self.path)# Attempt it the other way
+                    except Exception as e:
+                        log("Text2Speech failed %s"%e)
 
-                #winsound.MessageBeep()
-                #log(self.actionStore)
                 if self.actionStore:
                     self.store()
                 return True
