@@ -5,8 +5,8 @@ Prerequisites
 -------------
 ED Market Connector: https://github.com/EDCD/EDMarketConnector/releases/tag/Release%2F4.0.4 (When I wrote this I was using v4.0.4. Other versions may or may not work)
 EDMCOverlay: https://github.com/inorton/EDMCOverlay/releases (When I wrote this I was using v1.0.5. Other versions may or may not work).
-Windows 10: win32com.client is required for voiceover. May or may not be required for the rest of the plugin to work (I've not tested it).
-Python 3 https://www.python.org/ (This may not be necessary if you don't want a voiceover. But ED Market Connector uses Python anyway. At time of writing I can't get the voice to work within EDMC so it tries to call python directly from the command line)
+Windows 10: win32com.client is required for voiceover (pip3 install pywin32) (At time of writing I can't get the voice to work within EDMC so it tries to call python directly from the command line)
+Python 3 https://www.python.org/ 
 
 
 
